@@ -1,0 +1,8 @@
+# https://microk8s.io/docs/addon-hostpath-storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: microk8s-pvc
+spec:
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
