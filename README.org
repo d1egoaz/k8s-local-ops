@@ -1,0 +1,21 @@
+** High-level view of my cluster's current state
+
+#+begin_src mermaid
+graph TD;
+    raspberryPi[Raspberry Pi 5] --> microK8s[MicroK8s];
+    microK8s --> cluster[(Kubernetes Cluster)];
+    cluster --> localStorage[Local Storage Addon];
+    cluster --> homeAssistant[Home Assistant];
+    cluster --> nodeRed[Node Red];
+    cluster --> homeBridge[Home Bridge];
+
+    classDef hardware fill:#4caf50,color:#fff;
+    classDef k8s fill:#326ce5,color:#fff;
+    classDef pending fill:#ff9800,color:#fff;
+    classDef addon fill:#f9a825,color:#fff;
+
+    class raspberryPi hardware;
+    class microK8s,cluster k8s;
+    class localStorage addon;
+    class piholeOrAdguard pending;
+#+end_src
