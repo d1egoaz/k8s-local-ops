@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homebridge-deployment
+  labels:
+    app: homebridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homebridge
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: homebridge
+    spec:
+      hostNetwork: true
+      containers:
+        - name: homebridge
+          image: homebridge/homebridge:2024-01-08
+          ports:
+            - containerPort: 8581
+          volumeMounts:
+            - name: pvc
+              mountPath: /homebridge
+              subPath: homebridge
+      volumes:
+        - name: pvc
+          persistentVolumeClaim:
+            claimName: microk8s-pvc

@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: homebridge-service
+  labels:
+    app: homebridge
+spec:
+  ports:
+    - protocol: TCP
+      port: 8581
+      targetPort: 8581
+      nodePort: 31581
+  selector:
+    app: homebridge
+  type: NodePort
