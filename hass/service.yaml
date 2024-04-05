@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hass-service
+  labels:
+    app: hass
+spec:
+  ports:
+    - protocol: TCP
+      port: 8123
+      targetPort: 8123
+      nodePort: 30123
+  selector:
+    app: hass
+  type: NodePort
