@@ -1,9 +1,9 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: hass-service
+  name: homeassistant
   labels:
-    app: hass
+    app: homeassistant
 spec:
   ports:
     - protocol: TCP
@@ -11,5 +11,5 @@ spec:
       targetPort: 8123
       nodePort: 30123
   selector:
-    app: hass
+    app: homeassistant
   type: NodePort
