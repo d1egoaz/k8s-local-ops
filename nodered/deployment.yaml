@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodered-deployment
+  labels:
+    app: nodered
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodered
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nodered
+    spec:
+      containers:
+        - name: nodered
+          image: nodered/node-red:3.1.8
+          ports:
+            - containerPort: 1880
+          volumeMounts:
+            - name: pvc
+              mountPath: /data
+              subPath: nodered
+      volumes:
+        - name: pvc
+          persistentVolumeClaim:
+            claimName: microk8s-pvc

@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nodered-service
+  labels:
+    app: nodered
+spec:
+  ports:
+    - protocol: TCP
+      port: 1880
+      targetPort: 1880
+      nodePort: 31880
+  selector:
+    app: nodered
+  type: NodePort
