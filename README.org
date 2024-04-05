@@ -19,3 +19,29 @@ graph TD;
     class localStorage addon;
     class piholeOrAdguard pending;
 #+end_src
+
+** Local Storage Directory (on my machine)
+
+#+begin_example
+/var/snap/microk8s/common/default-storage/default-microk8s-pvc-pvc-8ac1224e-2c0d-4a0a-85c8-21c39b6f1d4d
+#+end_example
+
+To get the subdirectories per component in local storage, make sure you mount the volume with =subPath=, for example:
+
+#+begin_example yaml
+volumeMounts:
+- name: pvc
+  mountPath: /homebridge
+  subPath: homebridge
+#+end_example
+
+*** Current subdirectories
+
+#+begin_example bash
+/var/snap/microk8s/common/default-storage/default-microk8s-pvc-pvc-8ac1224e-2c0d-4a0a-85c8-21c39b6f1d4d
+$ tree -L 1
+.
+├── hass
+├── homebridge
+└── nodered
+#+end_example
