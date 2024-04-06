@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adguard
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: adguard
+    spec:
+      containers:
+        - name: adguard-home
+          image: adguard/adguardhome:v0.107.48
+          ports:
+            - containerPort: 53 # dns
+              name: dns
+              protocol: UDP
+            - containerPort: 3000 # initial setup
+              name: http-initial
+            - containerPort: 80 # web gui
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: pvc
+              mountPath: /opt/adguardhome/work
+              subPath: adguard/work
+            - name: pvc
+              mountPath: /opt/adguardhome/conf
+              subPath: adguard/conf
+      volumes:
+        - name: pvc
+          persistentVolumeClaim:
+            claimName: microk8s-pvc
