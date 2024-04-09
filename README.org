@@ -45,3 +45,8 @@ $ tree -L 1
 ├── homebridge
 └── nodered
 #+end_example
+
+** URLs
+*** [[https://192.168.42.23:10443][k8s Dashboard]]
+*** [[http://192.168.42.23:31880][Node Red]]
+*** [[http://192.168.42.23:8123][Home Assistant]]
