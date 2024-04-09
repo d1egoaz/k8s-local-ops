@@ -17,6 +17,17 @@ spec:
         app: homeassistant
     spec:
       hostNetwork: true
+      initContainers:
+        - name: install-hacs-when-needed
+          image: alpine:latest
+          command:
+            - sh
+            - -c
+            - if [ ! -d /config/custom_components/hacs ]; then apk add --no-cache bash wget && wget -O - https://get.hacs.xyz | bash -; fi
+          volumeMounts:
+            - mountPath: /config
+              name: pvc
+              subPath: hass
       containers:
         - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:2024.4.0
@@ -30,7 +41,6 @@ spec:
         - name: pvc
           persistentVolumeClaim:
             claimName: microk8s-pvc
-
 # when multinode use:
 # [1] https://docs.openebs.io/
 # [2] https://microk8s.io/docs/addon-openebs
