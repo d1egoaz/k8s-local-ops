@@ -6,6 +6,7 @@ graph TD;
     microK8s --> cluster[(Kubernetes Cluster)];
     cluster --> localStorage[Local Storage Addon];
     cluster --> homeAssistant[Home Assistant];
+    homeAssistant --> hacs[hacs Addon] ;
     cluster --> nodeRed[Node Red];
     cluster --> homeBridge[Home Bridge];
 
@@ -16,7 +17,7 @@ graph TD;
 
     class raspberryPi hardware;
     class microK8s,cluster k8s;
-    class localStorage addon;
+    class localStorage,hacs addon;
     class piholeOrAdguard pending;
 #+end_src
 
