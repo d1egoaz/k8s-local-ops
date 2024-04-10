@@ -48,6 +48,17 @@ $ tree -L 1
 #+end_example
 
 ** URLs
+
 *** [[https://192.168.42.23:10443][k8s Dashboard]]
+
 *** [[http://192.168.42.23:31880][Node Red]]
+
 *** [[http://192.168.42.23:8123][Home Assistant]]
+
+** Connect from my machine to microk8s
+
+#+begin_example
+mkdir ~/.kube
+scp d1egoaz@192.168.42.23:/var/snap/microk8s/current/credentials/client.config ~/.kube/config
+kubectl config use-context microk8s-cluster
+#+end_example
